@@ -6,7 +6,7 @@ JSTerm is a powerful and lightweight terminal library for your webpage, all in p
 
  * Completely customizable terminal (font, colors, etc).
  * Authentic terminal experience with a blinking cursor, etc.
- * Easy implementation. All you need is a container DIV and 4 lines of code for the most basic example.
+ * Easy implementation. All you need is a DIV container and 4 lines of code for the most basic example.
 
 ## Example (no input)
 
