@@ -2,6 +2,32 @@
 
 JSTerm is a powerful and lightweight terminal library for your webpage, all in pure JavaScript.
 
+## Features
+
+ * Completely customizable terminal (font, colors, etc).
+ * Authentic terminal experience with a blinking cursor, etc.
+ * Easy implementation. All you need is a container DIV and 4 lines of code for the most basic example.
+
+## Example (no input)
+
+*Note: more examples can be found in the examples/ directory*
+*If any examples do not work, please raise an issue immediately.*
+
+```js
+var term = new Terminal('term_container', 800, 600);
+term.termInit();
+term.println('Hello world!');
+```
+
+## Example (with input)
+
+```js
+var term = new Terminal('term_container', 800, 600);
+term.termInit();
+term.print('Enter any text to repeat: ');
+term.input((term, text)=>{ term.print('You said ' + text); });
+```
+
 ## How to install
 
 Just go to releases and select the latest release shown.
