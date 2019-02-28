@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>Terminal Example</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="scroll.css">
+    </head>
+    <body style='background-color: black; margin: 0;'>
+        <div id="term" style='box-sizing: border-box; padding: 10px'></div>
+        <script src="../../jsterm-dev.js">
+        </script>
+        <script>
+        var term = new Terminal('term', '100%', '100%');
+        term.termInit();
+        term.println("Hello world!\nType any text to repeat it.");
+        term.input((term, text)=>{
+            term.println(`You said: ${text}`);
+        });
+        </script>
+    </body>
+</html>

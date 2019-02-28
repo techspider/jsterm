@@ -66,17 +66,27 @@ function locateCharFromMap(isShiftKey, characterCode) {
     return character;
 }
 
-var Terminal = function(containerId, width, height)
+var TerminalOptions = function()
+{
+    this.fontSize = '12px';
+    this.cursorBlink = true;
+    this.fontFamily = 'monospace';
+    this.backColor = '#000000';
+    this.foreColor = '#FFFFFF';
+}
+
+var Terminal = function(containerId, width, height, opts)
 {
     this.container = typeof(containerId) == "string" ? document.getElementById(containerId) : containerId; //If an element is already specified, ignore it
     this.termId = `term_${_TGlobal.createdTerms}`;
     this.textContainerId = `${this.termId}_textContainer`;
+    var options = (opts != null) ? opts : new TerminalOptions();
     this.textContainer = null;
-    this.backColor = "#000000";
-    this.foreColor = "#FFFFFF";
-    this.cursorBlink = false;
-    this.fontSize = '12px';
-    this.fontFamily = 'Courier New';
+    this.backColor = options.backColor;
+    this.foreColor = options.foreColor;
+    this.cursorBlink = options.cursorBlink;
+    this.fontSize = options.fontSize;
+    this.fontFamily = options.fontFamily;
     this.width = width;
     this.height = height;
     this.cursor = null;
@@ -90,11 +100,14 @@ var Terminal = function(containerId, width, height)
         this.textContainer.style.fontFamily = this.fontFamily;
         this.textContainer.style.fontWeight = 900;
         this.textContainer.style.overflowX = 'hidden';
-        this.textContainer.style.maxWidth = `${this.width}px`;
+        if(typeof(this.width) == 'number') this.textContainer.style.maxWidth = `${this.width}px`;
+        else this.textContainer.style.maxWidth = this.width;
 
         this.container.style.backgroundColor = this.backColor;
-        this.container.style.height = `${this.height}px`;
-        this.container.style.width = `${this.width}px`;
+        if(typeof(this.width) == 'number') this.container.style.width = `${this.width}px`;
+        else this.container.style.width = this.width;
+        if(typeof(this.height) == 'number') this.container.style.height = `${this.height}px`;
+        else this.container.style.height = this.height;
         this.container.style.overflowY = 'scroll';
 
         this.cursor = document.createElement('span');
@@ -163,7 +176,7 @@ var Terminal = function(containerId, width, height)
                 _TGlobal.kbdListen = false;
                 document.removeEventListener('keydown', _TGlobal.t._keyboardListener, true);
                 document.removeEventListener('keyup', _TGlobal.t._keyboardListenerUp, true);
-                _TGlobal.kbdCb(_TGlobal.inputString);
+                _TGlobal.kbdCb(_TGlobal.t, _TGlobal.inputString);
                 break;
             case 8: //BKSP
                 if(!_TGlobal.t.textContainer.children.length > 2) return;
