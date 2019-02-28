@@ -7,6 +7,11 @@
     <body>
         <div id="term"></div>
         <script src="../../jsterm-dev.js">
-        </script>        
+        </script>
+        <script>
+        var term = new Terminal('term', 800, 600);
+        term.termInit();
+        term.print("Hello world!");
+        </script>
     </body>
 </html>
