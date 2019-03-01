@@ -6,7 +6,7 @@ term.println("JavaScript shell version 1.0.\n");
 console.log = (text)=> term.print(text);
 var pe;
 console.error = (pe = (err)=>{
-    term.print(err, false, {
+    term.print(err + "\n", false, {
         foreColor: 'red',
         backColor: 'inherit'
     });
