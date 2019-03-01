@@ -1,3 +1,8 @@
+/*
+ * jsterm (C) mr_chainman (techspider) 2019.
+ * Licensed under the GNU GPLv3.
+ */
+
 var _TGlobal = {
     createdTerms: 0,
     terminalOpts: [],
