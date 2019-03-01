@@ -49,7 +49,6 @@ All items marked {P} are planned for a future release.
 
 ### Known Bugs/Issues
 
- * Character map is very buggy causing some keys to be misidentified.
  * Key listener listens on the entire document instead of the terminal container.
 
 
