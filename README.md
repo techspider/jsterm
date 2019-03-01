@@ -7,6 +7,8 @@ JSTerm is a powerful and lightweight terminal library for your webpage, all in p
  * Completely customizable terminal (font, colors, etc).
  * Authentic terminal experience with a blinking cursor, etc.
  * Easy implementation. All you need is a DIV container and 4 lines of code for the most basic example.
+ * Automatically converts unknown objects to JSON when printing.
+ * Can print advanced objects such as HTML elements.
 
 ## Example (no input)
 
@@ -38,8 +40,7 @@ All items marked {P} are planned for a future release.
 
 ### Missing Features
 
- * No clear screen support {P}
- * No color support {P}
+ * IDK yet
 
 ### Known Bugs/Issues
 

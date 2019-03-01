@@ -75,6 +75,12 @@ var TerminalOptions = function()
     this.foreColor = '#FFFFFF';
 }
 
+var PrintStyleOptions = function()
+{
+    this.backColor = 'inherit';
+    this.foreColor = 'inherit';
+}
+
 var Terminal = function(containerId, width, height, opts)
 {
     this.container = typeof(containerId) == "string" ? document.getElementById(containerId) : containerId; //If an element is already specified, ignore it
@@ -128,16 +134,40 @@ var Terminal = function(containerId, width, height, opts)
         }
     }
 
-    this.print = function(text, chrattr)
+    this.clear = function()
+    {
+        this.textContainer.innerHTML = "";
+        this.textContainer.appendChild(this.cursor);
+    }
+
+    this.print = function(text, chrattr, opts)
     {
         this.textContainer.removeChild(this.cursor);
         var textElement = document.createElement('span');
         textElement.innerText = text;
         textElement.style.whiteSpace = 'pre-line';
         textElement.style.display = 'inline';
+        if(opts != null)
+        {
+            if(opts.foreColor != 'inherit') textElement.style.color = opts.foreColor;
+            if(opts.backColor != 'inherit') textElement.style.color = opts.backColor;
+            textElement.style.fontWeight = 900;
+        }
         if(chrattr) textElement.setAttribute(`is_kbd_char${_TGlobal.kbdSecret}`, "true");
         _TGlobal.lastPrintElem = textElement;
         this.textContainer.appendChild(textElement);
+        this.textContainer.appendChild(this.cursor);
+        this.scrollUpdate();
+    }
+
+    this.printHtml = function(htmlCode)
+    {
+        this.textContainer.removeChild(this.cursor);
+        var htmlElem = document.createElement('span');
+        htmlElem.innerHTML = htmlCode;
+        htmlElem.style.display = 'inline';
+        htmlElem.innerHTML += "<br>";
+        this.textContainer.appendChild(htmlElem);
         this.textContainer.appendChild(this.cursor);
         this.scrollUpdate();
     }
