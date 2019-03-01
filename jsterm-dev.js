@@ -18,8 +18,10 @@ var _TGlobal = {
 function locateCharFromMap(shiftHeld, event) {
     switch(event.keyCode)
     {
+        case 32:
+            return " ";
         default:
-            return event.key;
+            return event.key[0].toString();
     }
 }
 
@@ -121,7 +123,11 @@ var Terminal = function(containerId, width, height, opts)
             if(opts.backColor != 'inherit') textElement.style.color = opts.backColor;
             textElement.style.fontWeight = 900;
         }
-        if(chrattr) textElement.setAttribute(`is_kbd_char${_TGlobal.kbdSecret}`, "true");
+        if(chrattr)
+        {
+            textElement.setAttribute(`is_kbd_char${_TGlobal.kbdSecret}`, "true");
+            if(text == ' ') textElement.innerHTML = "&nbsp";
+        }
         _TGlobal.lastPrintElem = textElement;
         this.textContainer.appendChild(textElement);
         this.textContainer.appendChild(this.cursor);
@@ -168,6 +174,12 @@ var Terminal = function(containerId, width, height, opts)
                 break;
             case 17: //CTRL
                 _TGlobal.kbdCtrlHeld = true;
+                break;
+            case 32: //SPACE
+                _TGlobal.inputString += ' ';
+                _TGlobal.t.print(' ', true);
+                break;
+            case 20: //CAPS LOCK
                 break;
             case 13: //RETURN, END THE LISTENING
                 _TGlobal.t.print('\n', true);
